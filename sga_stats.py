@@ -8,6 +8,7 @@ Statistics and output for the implementation of the Simple Genetic algorithm in
 sga.py
 """
 from population import Population
+from numpy import where
 
 def stats(pop: Population):
     """Generates and returns stats for a Population pop"""
@@ -39,4 +40,12 @@ def report(pop: Population, gen_num: int):
                  f"{pmax:.4f}    min: {pmin:.4f}    mean: {pmean:.4f}"\
                  f"    sum: {sof:.4f}"
     print(report_str)
+    print("=" * 100)
+
+    max_index = where(pop.fitness_lyst == pmax)[0][0]
+    top_individual = pop.pop[max_index]
+    print(f"Top Individual                    x*            z*        fitness")
+    print(f"{top_individual.genotype}{top_individual.phenotype:>14}"\
+          f"    {top_individual.phenotype / top_individual.c:.4f}"\
+          f"    {top_individual.fitness:.4f}")
     print("=" * 100)
